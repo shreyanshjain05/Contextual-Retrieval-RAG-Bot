@@ -1,0 +1,8 @@
+groq
+sentence_transformers
+langchain_community
+pypdf
+langchain-chroma
+langchain-huggingface
+langchain-text-splitters
+
