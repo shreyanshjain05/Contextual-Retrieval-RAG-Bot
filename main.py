@@ -156,7 +156,7 @@ class Chatbot:
 
         try:
             # Enhanced query for better retrieval
-            enhanced_query = f"institutional information query: {query}"
+            enhanced_query = f"Information query: {query}"
             results = self.vector_store.similarity_search(enhanced_query, k=k)
             print(f"Found {len(results)} relevant documents for query: {query}")
             return results
@@ -183,14 +183,12 @@ class Chatbot:
             context_parts.append(f"Information {i}:\n{result.page_content}\n")
 
         context = "\n".join(context_parts)
-        institution_name = search_results[0].metadata.get('institution_name', 'the institution')
-
         # Generate response using LLM
         try:
-            system_prompt = f"""You are an intelligent chatbot assistant for {institution_name}. You help students, parents, and prospective students get accurate information about the institution.
+            system_prompt = f"""You are an intelligent chatbot assistant for. You help students, parents, and prospective students get accurate information about the country.
 
             Instructions:
-            - Provide comprehensive, accurate answers based ONLY on the provided institutional context
+            - Provide comprehensive, accurate answers based ONLY on the provided Country's context
             - Be helpful, professional, and friendly
             - Structure your responses clearly with bullet points or sections when appropriate
             - If specific information isn't available in the context, clearly state that
@@ -200,10 +198,10 @@ class Chatbot:
 
             user_prompt = f"""Query: "{query}"
 
-            Institutional Context:
+            Contry Context:
             {context}
 
-            Please provide a helpful and accurate response based on the institutional information provided."""
+            Please provide a helpful and accurate response based on the information provided."""
 
             response = self.groq_client.chat.completions.create(
                 messages=[
@@ -225,12 +223,12 @@ class Chatbot:
 
         except Exception as e:
             print(f"Error generating response: {str(e)}")
-            return "I'm having trouble processing your request right now. Please try again or contact the institution directly."
+            return "I'm having trouble processing your request right now. Please try again ."
 
 
 def main():
-    """Run the institutional chatbot"""
-    print("Institutional Chatbot Assistant")
+    """Run the chatbot"""
+    print("Chatbot Assistant")
     print("-" * 40)
 
     # Initialize chatbot
